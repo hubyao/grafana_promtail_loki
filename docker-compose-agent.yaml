@@ -1,0 +1,22 @@
+# docker-compose配置参考：https://github.com/grafana/loki/blob/master/production/docker-compose.yaml
+version: "3"
+
+# 网桥loki -> 方便相互通讯
+networks:
+  loki:
+
+services:
+  # Loki官方支持的日志采集端
+  promtail:
+    image: grafana/promtail:latest
+    container_name: grafana_promtail_loki_demo_promtail
+    restart: unless-stopped
+    volumes:
+      - /root/www/peony-backend/peony-backend/api/runtime/logs:/var/logs/api
+      - /root/www/peony-backend/peony-backend/admin-api/runtime/logs:/var/logs/admin-api
+      - /root/www/peony-backend/peony-backend/ads-api/runtime/logs:/var/logs/ads-api
+      - ./grafana_promtail_loki/promtail-agent:/etc/promtail
+    command: -config.file=/etc/promtail/promtail-docker-config.yaml
+    networks:
+      - loki
+
