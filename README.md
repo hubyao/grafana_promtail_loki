@@ -169,8 +169,11 @@ TIPS:
 =~ 正则匹配
 !~ 正则不匹配
 ## 部署
-
-
+```
+git clone https://github.com/hubyao/grafana_promtail_loki
+cd grafana_promtail_loki
+docker-compose  up -d
+```
 
 ## 参考资料
 - [Grafana Loki初体验](https://zhuanlan.zhihu.com/p/517431546)
